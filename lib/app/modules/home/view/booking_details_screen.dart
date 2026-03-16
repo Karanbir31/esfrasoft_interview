@@ -61,7 +61,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
       ),
       hint: Text("Change Status"),
 
-      items: ["Complete", "Cancelled"]
+      items: ["Complete", "Cancel"]
           .map((status) => DropdownMenuItem(value: status, child: Text(status)))
           .toList(),
       onChanged: (value) {

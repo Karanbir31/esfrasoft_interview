@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 class BookingDetailsController extends GetxController {
   Rxn<BookingItem> bookingItem = Rxn<BookingItem>();
 
-  RxList<String> item = <String>[].obs;
-
   @override
   void onInit() {
     // TODO: implement onInit
@@ -19,15 +17,15 @@ class BookingDetailsController extends GetxController {
     if (arguments != null && arguments.containsKey("data")) {
       debugPrint("data: ${arguments["data"]}");
       bookingItem.value = arguments["data"] as BookingItem;
-
-      if (bookingItem.value?.status == "Booked") {
-        item.assignAll(["Completed", "Cancelled"]);
-      }
     }
   }
 
-  void onChnageValue(String value){
-    bookingItem.value?.status = value;
+  void onChnageValue(String value) {
+    if (value == "Complete") {
+      bookingItem.value?.status = "Completed";
+    } else if (value == "Cancel") {
+      bookingItem.value?.status = "Cancelled";
+    }
     bookingItem.refresh();
 
     Get.back(result: bookingItem.value?.status);
